@@ -1,0 +1,45 @@
+/*  Kevin Kraaijveld CSS CMS Frontend
+============================================================================
+
+1. Algemene CSS
+2. Header
+3. Navigation
+4. Copyright
+5. Overige CSS
+
+============================================================================ */
+
+/* 1. Algemene CSS
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+
+
+/* 2. HEADER
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+
+
+/* 3. Navigation
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+
+
+/* 4. Copyright
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+a.btn.btn-primary {
+    display: table-caption;
+}
+
+/* 5. Overige CSS
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+.pager> li .active_link {
+  background-color: #eee !important;
+}
+
+pre {
+    background-color: #eee;
+    border-radius: 3px;
+    font-family: courier, monospace;
+    padding: 3px 5px;
+    margin: 4px;
+    color: #635c5f;
+}
+
+/*Made by Kevin Kraaijveld*/
