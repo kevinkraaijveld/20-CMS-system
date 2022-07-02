@@ -41,7 +41,7 @@ Displays a form to edit a post from the database
     $post_content = $_POST['post_content'];
 
     move_uploaded_file($post_image_temp, "../../images/$post_image");
-    echo"<div class='alert alert-success alert-dismissible fade in'> <a href='' class='close' data-dismiss='alert' aria-label='close'>&times;</a>Post updated - <a href='../../post.php?post_id=$post_id'>View post</a></div>";
+    echo"<div class='alert alert-success alert-dismissible '> <a href='' class='close' data-dismiss='alert' aria-label='close'>&times;</a>Post updated - <a href='../../post.php?post_id=$post_id'>View post</a></div>";
 
     if(empty($post_image)){
       $query = "SELECT * from posts WHERE post_id =  {$post_id}";
@@ -89,7 +89,6 @@ Displays a form to edit a post from the database
             else {
               echo "<option value='{$cat_id}'>{$cat_id} {$cat_title}</option>";
             }
-          echo "<option value='{$cat_id}'>{$cat_id} {$cat_title}</option>";
         }
       ?>
     </select>

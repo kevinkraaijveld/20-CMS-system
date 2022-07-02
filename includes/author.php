@@ -1,13 +1,15 @@
-<!-- Kevin Kraaijveld - CMS system - post
+<!-- Kevin Kraaijveld - CMS system - author
 ============================================================================
-Shows single post in post.php
+Frontend - include for author.php
 -->
+
 <!-- KK: Content -->
 <?php
-if(isset($_GET['author'])){
-  $author = $_GET['author'];
-}
+    if(isset($_GET['author'])){
+      $author = $_GET['author'];
+    }
 ?>
+
 <?php
   $query = "SELECT * FROM users WHERE user_id = $author";
   $select_all_authors = mysqli_query($connection, $query);
@@ -24,9 +26,9 @@ if(isset($_GET['author'])){
       }
       echo "<h2>" . $user_firstname . " " . $user_lastname . "</h2>" ;
       echo "<div class='container'>";
-      echo "<img  style='width:150px; float:left; margin:20px' class='img-responsive' src='images/avatars/" . $user_image . " '>";
+      echo "<img  style='width:150px; float:left; margin:20px' class='img-responsive' src='/CMS_system/images/avatars/" . $user_image . " '>";
       echo "<br>";
-      echo "Username: " . $username;
+      echo "Username: " . $user_name;
       echo "<br>";
       echo "First name: " . $user_firstname;
       echo "<br>";
@@ -37,6 +39,7 @@ if(isset($_GET['author'])){
 
     }
 ?>
+
 <br><br><br>
 <!-- KK: Pagination -->
 <?php
@@ -76,7 +79,7 @@ if(isset($_SESSION['user_role']) && $_SESSION['user_role'] == 'Admin' ){
       $post_user = $row['post_user'];
       $post_date = $row['post_date'];
       $post_image = $row['post_image'];
-      $post_content = $row['post_content'];
+      $post_content = substr($row['post_content'], 0,250);
       $post_tags = $row['post_tags'];
       $post_status = $row['post_status'];
 ?>
@@ -85,7 +88,7 @@ if(isset($_SESSION['user_role']) && $_SESSION['user_role'] == 'Admin' ){
 
         <div class="card-body">
           <h2 class="card-title">
-              <a href="post.php?post_id=<?php echo $post_id?>">
+              <a href="/CMS_system/post/<?php echo $post_id?>">
                 <?php echo $post_title ?>
               </a>
               <?php
@@ -95,24 +98,28 @@ if(isset($_SESSION['user_role']) && $_SESSION['user_role'] == 'Admin' ){
               ?>
           </h2>
 
-          <!-- Preview Image -->
-          <a href="post.php?post_id=<?php echo $post_id?>">
-            <img class="img-fluid rounded" src="images/<?php echo $post_image ?>" alt="">
-          </a>
-          <br><br>
+          <!-- KK: Image -->
+          <?php
+          if(isset($post_image) && $post_image != ""){?>
+            <a href="/CMS_system/post/<?php echo $post_id?>">
+              <img class="card-img-top" src="images/<?php echo $post_image ?>" alt="Card image cap">
+            </a>
+            <br><br>
+          <?php } ?>
 
           <!-- Post Content -->
           <p class="card-text">
             <?php echo $post_content ?>
           </p>
+        </pre>
 
-          <a class="btn btn-primary" href="post.php?post_id=<?php echo $post_id?>">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
+          <a class="btn btn-primary" href="/CMS_system/post/<?php echo $post_id?>">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
         </div>
 
         <div class="card-footer text-muted">
           <span class="glyphicon glyphicon-time"></span> Posted on <?php echo $post_date ?> by
 
-          <a href="author.php?author=<?php echo $post_author?>">
+          <a href="/CMS_system/author/<?php echo $post_author?>">
               <?php
                 $query = "SELECT * FROM users WHERE user_role = 'Author' OR user_role = 'Admin'";
                 $select_all_authors = mysqli_query($connection, $query);

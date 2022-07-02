@@ -14,16 +14,16 @@
       <title>CMS system by Kevin Kraaijveld</title>
 
       <!-- KK: Bootstrap CSS -->
-      <link href="css/bootstrap.min.css" rel="stylesheet">
+      <link href="/CMS_system/css/bootstrap.min.css" rel="stylesheet">
 
       <!-- KK: Page CSS -->
-      <link href="css/blog-home.css" rel="stylesheet">
+      <link href="/CMS_system/css/blog-home.css" rel="stylesheet">
 
       <!-- KK: Custom Fonts -->
       <link href="admin/css/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
       <!-- KK: Custom CSS-->
-      <link href="css/stylesheet.css" rel="stylesheet">
+      <link href="/CMS_system/css/stylesheet.css" rel="stylesheet">
 
   </head>
 

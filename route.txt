@@ -1,0 +1,89 @@
+Front page is index.php
+
+Navigation - category is category.php
+
+Navigation - contact is contact.php
+
+Navigation right - register is register.php
+
+Post by author is - author.php
+
+Single post is - post.php
+
+Sidebar search - search is search.php
+
+-------------------------------------------------------------
+
+Database - includes/db.php
+
+Sidebar - includes/sidebar.php
+
+Navigation - includes/navigation.php
+
+Header - includes/header.php
+
+Footer - includes/footr.php
+
+Content - includes/content.php (index)
+
+Category - includes/catagory.php (category)
+
+Post - includes/post.php (single post)
+
+Author - includes/author.php
+
+Comments - includes/comments.php
+
+Login - includes/login .php
+
+Logout- includes/logout .php
+
+-------------------------------------------------------------
+Admin
+-------------------------------------------------------------
+
+Admin - admin/pages/index.php
+
+Posts - admin/pages/posts.php
+
+Categories - admin/pages/catagories.php
+
+Comments - admin/pages/comments.php
+
+Users - admin/pages/users.php
+
+Profile - admin/pages/profile.php
+
+-------------------------------------------------------------
+
+Posts - admin/pages/show_all_posts.php
+
+Posts - admin/pages/add_posts.php
+
+Posts - admin/pages/edit_posts.php
+
+Comments - admin/pages/show_all_comments .php
+
+Comments - admin/pages/edit_comments .php
+
+Users - admin/pages/show_all_users.php
+
+Users - admin/pages/add_user.php
+
+Users- admin/pages/edit_user.php
+
+-------------------------------------------------------------
+
+Database - admin/includes/db.php
+
+Functions- admin/includes/functions.php (functions.php)
+
+Admin widgets - admin/includes/admin_widgets.php (index.php)
+
+Navigation - admin/includes/navigation.php
+
+Header - admin/includes/header.php
+
+Footer - admin/includes/footer.php
+
+Delete - admin/includes/delete_modal.php (pop-up delete button)

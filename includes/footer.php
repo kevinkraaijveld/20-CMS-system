@@ -4,7 +4,6 @@
   <div class="container">
     <p class="m-0 text-center text-white">Copyright &copy; Kevin Kraaijveld <?php echo date("Y"); ?></p>
   </div>
-  <!-- /.container -->
 </footer>
 
 <!-- KK: jQuery -->

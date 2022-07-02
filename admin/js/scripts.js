@@ -1,3 +1,7 @@
+// Kevin Kraaijveld Javascript CMS Backend
+// ============================================================================
+
+// KK: overrides placeholder textarea WYSIWYG editor
 $(document).ready(function() {
         jQuery ('#body').summernote({
         placeholder: 'Type your message here',
@@ -5,3 +9,5 @@ $(document).ready(function() {
         height: 300
       });
 });
+
+/*Made by Kevin Kraaijveld*/

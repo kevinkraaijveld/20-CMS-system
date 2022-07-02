@@ -11,7 +11,9 @@
 
 /* 1. Algemene CSS
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
-
+img#comment_avatar{
+  width:50px!important;
+}
 
 /* 2. HEADER
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
@@ -29,11 +31,13 @@ a.btn.btn-primary {
 
 /* 5. Overige CSS
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
-.pager> li .active_link {
-  background-color: #eee !important;
+/* KK: active pagnation */
+a.page-link.active{
+  background-color: #eee;
 }
 
-pre {
+/* Code divs */
+pre ,code, xmp{
     background-color: #eee;
     border-radius: 3px;
     font-family: courier, monospace;

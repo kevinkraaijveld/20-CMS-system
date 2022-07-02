@@ -1,11 +1,19 @@
-<!-- Kevin Kraaijveld - CMS system - Add a User
-============================================================================
-Displays a form to add a user to the database
--->
-
-<?php
-// KK: store_user function in functions.php
+<!-- Kevin Kraaijveld - CMS system - Add a User
+
+============================================================================
+
+Displays a form to add a user to the database
+
+-->
+
+
+
+<?php
+
+// KK: store_user function in functions.php
+
 store_user();
+
 ?>
 
 <form class="form-group" action="" method="post" enctype="multipart/form-data" autocomplete="off">

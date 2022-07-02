@@ -46,7 +46,7 @@ Shows a table to display all comments
                         break;
 
                       case 'view':
-                        include 'view_comments.php';
+                        include 'show_all_comments.php';
                         break;
 
                       default:

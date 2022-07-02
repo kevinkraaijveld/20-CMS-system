@@ -2,6 +2,7 @@
 ============================================================================
 Frontend - Sidebar
 -->
+
 <!-- KK: Sidebar -->
 <div class="col-md-4">
 
@@ -11,7 +12,7 @@ Frontend - Sidebar
           Blog Search
       </h4>
       <div class="card-body">
-        <form class="input-group" action="search.php" method="post" autocomplete="off">
+        <form class="input-group" action="/CMS_system/search.php" method="post" autocomplete="off">
           <input name="search" type="text" class="form-control" placeholder="Search">
             <span class="input-group-btn">
               <input type="submit" class="btn btn-secondary" name="submit" value="Search">
@@ -19,7 +20,6 @@ Frontend - Sidebar
         </form>
       </div>
     </div>
-
 
     <!-- KK: login -->
     <?php if(!isset($_SESSION['user_id'])){ ?>
@@ -43,45 +43,34 @@ Frontend - Sidebar
     </div>
   <?php } ?>
 
-
     <!-- KK: Categories sidebar -->
     <div class="card my-4">
-
         <h4 class="card-header">Blog Categories</h4>
-
         <div class="card-body">
-
-        <div class="row">
-
-            <div class="col-lg-12">
-
-                <ul class="list-unstyled mb-0">
-                  <?php
-                  $query = "SELECT * FROM categories LIMIT 5";
-
-                  $select_all_categories = mysqli_query($connection, $query);
-
-                  while($row = mysqli_fetch_assoc($select_all_categories)){
-                    $cat_id = $row['cat_id'];
-                    $cat_title = $row['cat_title'];
-                    echo "<li><a href='category.php?category=$cat_id'>{$cat_title}</a></li>";
-                  }
-                  ?>
-                </ul>
-
-            </div>
-
-            </div>
-
+          <div class="row">
+              <div class="col-lg-12">
+                  <ul class="list-unstyled mb-0">
+                    <!-- KK:Select all categories and return as li -->
+                    <?php
+                    $query = "SELECT * FROM categories LIMIT 5";
+                    $select_all_categories = mysqli_query($connection, $query);
+                    while($row = mysqli_fetch_assoc($select_all_categories)){
+                      $cat_id = $row['cat_id'];
+                      $cat_title = $row['cat_title'];
+                      echo "<li><a href='category/$cat_id'>{$cat_title}</a></li>";
+                    }
+                    ?>
+                  </ul>
+              </div>
+          </div>
         </div>
-
     </div>
 
     <!-- KK: side widget -->
     <div class="card my-4">
         <h4  class="card-header">About the CMS system</h4>
         <div class="card-body">
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore, perspiciatis adipisci accusamus laudantium odit aliquam repellat tempore quos aspernatur vero.</p>
+          <p>This is a personal CMS system for little code snippets to help with quick programming.</p>
         </div>
     </div>
 

@@ -1,11 +1,12 @@
 <!-- Kevin Kraaijveld - CMS system - Logout
 ============================================================================
-Logout user
+Logout user - include for navigation.php
 -->
 
 <!-- KK: Start session -->
 <?php session_start(); ?>
 
+<!-- KK: nullify all sessions -->
 <?php
 $_SESSION['user_id'] = null;
 $_SESSION['username'] = null;

@@ -48,19 +48,26 @@ Shows a table to display all users
         $user_image = $row['user_image'];
       }
     }
-    if(!empty($user_password)){
-      $query_password = "SELECT user_password from users WHERE user_id = {$user_id}";
-      $get_user_query = mysqli_query($connection, $query_password);
-
-      $row = mysqli_fetch_assoc($get_user_query);
-      $db_user_password = $row['user_password'];
-
-      if($db_user_password !== $user_password){
-        $options = ['cost'=>10];
-        $user_password = password_hash("$user_password", PASSWORD_BCRYPT, $options );
-      }else{
-        $user_password = $db_user_password;
-      }
+
+    if(!empty($user_password)){
+      $query_password = "SELECT user_password from users WHERE user_id = {$user_id}";
+      $get_user_query = mysqli_query($connection, $query_password);
+      $row = mysqli_fetch_assoc($get_user_query);
+      $db_user_password = $row['user_password'];
+      if($db_user_password !== $user_password){
+        $options = ['cost'=>10];
+        $user_password = password_hash("$user_password", PASSWORD_BCRYPT, $options );
+      }else{
+        $user_password = $db_user_password;
+      }
+    }else{
+      $query_password = "SELECT user_password from users WHERE user_id = {$user_id}";
+      $get_user_query = mysqli_query($connection, $query_password);
+      while($row = mysqli_fetch_assoc($get_user_query)){
+        $user_password = $row['user_password'];
+      }
+    }
+
 
       $query = "UPDATE users SET ";
       $query .= "username = '{$username}', ";
@@ -71,7 +78,7 @@ Shows a table to display all users
       $query .= "user_image = '{$user_image}' ";
       $query .= "WHERE user_id = {$user_id}";
       $update_user = mysqli_query($connection, $query);
-    }
+
 
   }
 ?>

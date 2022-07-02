@@ -33,7 +33,7 @@ Dashboard - index.php
                       <h2>Welcome <?php echo $_SESSION['user_firstname'];?></h2>
                     </div>
                     <div class="col-lg-12">
-                      <?php include 'admin_widgets.php'; ?>
+                      <?php include '../includes/admin_widgets.php'; ?>
                     </div>
 
                 </div>

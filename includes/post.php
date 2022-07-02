@@ -20,6 +20,7 @@ if(isset($_GET['post_id'])){
 ?>
 <?php
 
+  // KK: select all posts
   $select_all_posts = mysqli_query($connection, $query);
 
   $count = mysqli_num_rows($select_all_posts);
@@ -53,7 +54,7 @@ if(isset($_GET['post_id'])){
       <!-- Author -->
       <p class="lead">
         by
-        <a href="author.php?author=<?php echo $post_author?>">
+        <a href="/CMS_system/author/<?php echo $post_author?>">
             <?php
               $query = "SELECT * FROM users WHERE user_role = 'Author' OR user_role = 'Admin'";
               $select_all_authors = mysqli_query($connection, $query);
@@ -82,21 +83,18 @@ if(isset($_GET['post_id'])){
       <hr>
 
       <!-- Preview Image -->
-      <img class="img-fluid rounded" src="images/<?php echo $post_image ?>" alt="">
+      <?php
+      if(isset($post_image) && $post_image != ""){?>
+        <img class="img-fluid rounded" src="/CMS_system/images/<?php echo $post_image ?>" alt="">
 
-      <hr>
+        <hr>
+      <?php } ?>
 
       <!-- Post Content -->
       <p class="lead">
         <?php echo $post_content ?>
       </p>
 
-      <hr>
-
-
-
-
-      <p><?php echo $post_content ?></p>
       <hr>
 <?php
     }

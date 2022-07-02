@@ -168,6 +168,23 @@ ul.alert-dropdown {
 .huge {
     font-size: 40px;
 }
+.panel-blue {
+    border-color: #5cb85c;
+}
+
+.panel-blue .panel-heading {
+    border-color: #5cb85c;
+    color: #fff;
+    background-color: #337ab7;
+}
+
+.panel-blue a {
+    color: #337ab7;
+}
+
+.panel-blue a:hover {
+    color: #23527c;
+}
 
 .panel-green {
     border-color: #5cb85c;

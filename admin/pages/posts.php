@@ -45,9 +45,8 @@ Shows a table to display all posts
                         break;
 
                       case 'edit_post':
-                        include 'edit_post.php';
-                        break;
-
+                        include 'edit_post.php';
+                        break;
                       default:
                         include 'show_all_posts.php';
                         break;

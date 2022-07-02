@@ -1,5 +1,6 @@
 <!-- KK: Navigation -->
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+
 
     <!-- KK: Mobile menu -->
         <div class="navbar-header">
@@ -11,9 +12,11 @@
         </button>
         <a class="navbar-brand" href="../pages/index.php">CMS Admin</a>
     </div>
+
 
-    <!-- KK: Menu Items -->
+    <!-- KK: Menu Items top-->
     <ul class="nav navbar-right top-nav">
+      <!-- KK: users_online functions.php 5 -->
       <li><a>Users online: <?php echo users_online();?></a></li>
       <li>
           <a href="../../index.php"><i class="fa fa-globe"></i> Front page</a>
@@ -32,6 +35,7 @@
             </ul>
         </li>
     </ul>
+
 
     <!-- KK Sidebar Menu -->
     <div class="collapse navbar-collapse navbar-ex1-collapse">
@@ -74,6 +78,7 @@
               break;
       }
       ?>
+
         <ul class="nav navbar-nav side-nav">
             <li class='<? echo $dashboard_class?>'>
                 <a href="index.php"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
@@ -108,10 +113,14 @@
                     <?php } ?>
                 </ul>
             </li>
+            <li  class='<? echo $contact_class?>'>
+                <a href="contact.php"><i class="glyphicon glyphicon-envelope"></i> Contact</a>
+            </li>
             <li  class='<? echo $profile_class?>'>
                 <a href="profile.php"><i class="fa fa-fw fa-dashboard"></i> Profile</a>
             </li>
         </ul>
+
     </div>
 
 </nav>

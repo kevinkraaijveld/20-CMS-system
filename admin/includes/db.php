@@ -1,3 +1,8 @@
+<!-- Kevin Kraaijveld - CMS system - db
+============================================================================
+Frontend - crate database connection
+-->
+
 <?php
 // KK: database variables
 $db['db_host'] = "localhost";

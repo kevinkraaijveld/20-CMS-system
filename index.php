@@ -1,18 +1,18 @@
 <!-- Kevin Kraaijveld - CMS system - index
 ============================================================================
-Frontend - index.php
+Frontend - displays all posts on index.php
 -->
 
-<!-- KK: Database -->
+<!-- KK: includes Database -->
 <?php include 'includes/db.php'; ?>
-<!-- KK: Header -->
+<!-- KK: includes Header -->
 <?php include 'includes/header.php'; ?>
-
 
 <div class="container">
 
     <div class="row">
 
+      <!-- KK: Title -->
         <div class="col-md-8">
           <br>
             <h1 class="page-header">
@@ -20,14 +20,17 @@ Frontend - index.php
                 <br>
                 <small>Imagine that!</small>
             </h1>
-            <br>
-            <!-- KK: Content -->
+          <br>
+
+            <!-- KK: Includes content.php to display all post -->
             <?php include 'includes/content.php'; ?>
 
         </div>
 
-        <!-- KK: Sidebar -->
+        <!-- KK: includes Sidebar -->
         <?php include 'includes/sidebar.php'; ?>
+
     </div>
-<!-- KK: Footer -->
+
+<!-- KK: includes Footer -->
 <?php include 'includes/footer.php'; ?>

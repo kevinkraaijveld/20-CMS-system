@@ -82,7 +82,7 @@ Shows a table to display all categories
                         ?>
                       </div>
 
-                  <!-- KK: Leftside -->
+                  <!-- KK: Righttside -->
                   <div class="col-lg-6">
                     <!-- KK: Categories Table -->
                     <table class="table table-hover">

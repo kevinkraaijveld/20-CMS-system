@@ -5,6 +5,7 @@ Shows all posts in index.php
 
 <!-- KK: Pagination -->
 <?php
+// KK:Max 3 posts per page
 $per_page = 3;
 if(isset($_GET['page'])){
   $page = $_GET['page'];
@@ -19,11 +20,13 @@ if($page == "" || $page == 1){
 $select_posts_count = "SELECT * FROM posts WHERE post_status = 'Published'";
 $find_count = mysqli_query($connection, $select_posts_count);
 $count = mysqli_num_rows($find_count);
+// KK: If there are no post
 if($count < 1){
   echo "<h2>No posts available</h2>";
 }
 $count = ceil ($count / $per_page);
 ?>
+
 <!-- KK: Content -->
 <?php
 if(isset($_SESSION['user_role']) && $_SESSION['user_role'] == 'Admin' ){
@@ -50,29 +53,42 @@ if(isset($_SESSION['user_role']) && $_SESSION['user_role'] == 'Admin' ){
       <div class="card mb-4">
 
         <div class="card-body">
+
+          <!-- KK: title  -->
           <h2 class="card-title">
-            <a href="post.php?post_id=<?php echo $post_id?>"><?php echo $post_title ?></a>
+            <a href="post/<?php echo $post_id?>"><?php echo $post_title ?></a>
             <?php
               if(isset($_SESSION['user_role']) && $_SESSION['user_role'] == 'Admin'&&  $post_status == 'Draft' ){
                 echo "Draft";
               }
             ?>
           </h2>
+
+          <!-- KK: Image -->
           <?php
           if(isset($post_image) && $post_image != ""){?>
-            <a href="post.php?post_id=<?php echo $post_id?>">
+            <a href="post/<?php echo $post_id?>">
               <img class="card-img-top" src="images/<?php echo $post_image ?>" alt="Card image cap">
             </a>
             <br><br>
           <?php } ?>
 
+          <!-- Post Content -->
+          <p class="card-text">
+            <?php echo $post_content ?>
+          </p>
+        </pre>
 
-          <p class="card-text"><?php echo $post_content ?></p>
-          <a href="post.php?post_id=<?php echo $post_id?>" class="btn btn-primary">Read More &rarr;</a>
+          <a href="post/<?php echo $post_id?>" class="btn btn-primary">Read More &rarr;</a>
         </div>
+
         <div class="card-footer text-muted">
+
+          <!-- KK: Date -->
           <span class="glyphicon glyphicon-time"></span> Posted on <?php echo $post_date ?> by
-          <a href="author.php?author=<?php echo $post_author?>">
+
+          <!-- KK: Author -->
+          <a href="/CMS_system/author/<?php echo $post_author?>">
             <?php
               $query = "SELECT * FROM users WHERE user_role = 'Author' OR user_role = 'Admin'";
               $select_all_authors = mysqli_query($connection, $query);
@@ -88,8 +104,10 @@ if(isset($_SESSION['user_role']) && $_SESSION['user_role'] == 'Admin' ){
                     $author = $user_firstname . " " .$user_lastname;
                   }
                 }
-              echo "$author";
-            ?>
+                echo "$author";
+              ?>
+            </a>
+
         </div>
       </div>
 
@@ -100,12 +118,11 @@ if(isset($_SESSION['user_role']) && $_SESSION['user_role'] == 'Admin' ){
 <ul class="pagination justify-content-center mb-4">
   <?php
   for ($i=1; $i <= $count ; $i++) {
-    if($i == $page){
-      echo "<li class='page-item'><a class='page-link active'  href='index.php?page={$i}'>{$i}</a></li>";
+    if($i == $page ){
+      echo "<li class='page-item'><a class='page-link active'  href='index?page={$i}'>{$i}</a></li>";
     }else{
-      echo "<li class='page-item'><a class='page-link' href='index.php?page={$i}'>{$i}</a></li>";
+      echo "<li class='page-item'><a class='page-link' href='index?page={$i}'>{$i}</a></li>";
     }
-
   }
   ?>
 </ul>

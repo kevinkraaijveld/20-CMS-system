@@ -31,7 +31,7 @@ Displays a form to edit a comment from the database
     $comment_status = $_POST['comment_status'];
     $comment_content = $_POST['comment_content'];
 
-    echo"<div class='alert alert-success alert-dismissible fade in'> <a href='' class='close' data-dismiss='alert' aria-label='close'>&times;</a>Comment updated - <a href='../../post.php?post_id=$comment_post_id'>View post</a></div>";
+    echo"<div class='alert alert-success alert-dismissible '> <a href='' class='close' data-dismiss='alert' aria-label='close'>&times;</a>Comment updated - <a href='../../post.php?post_id=$comment_post_id'>View post</a></div>";
     $query = "UPDATE comments SET ";
     $query .= "comment_author = '{$comment_author}', ";
     $query .= "comment_email = '{$comment_email}', ";

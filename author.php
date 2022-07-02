@@ -1,33 +1,36 @@
 <!-- Kevin Kraaijveld - CMS system - author
 ============================================================================
-Frontend - display author page
+Frontend - display all posts from a single author
 -->
 
-<!-- KK: Database -->
+<!-- KK: includes Database -->
 <?php include 'includes/db.php'; ?>
-<!-- KK: Header -->
+<!-- KK: includes Header -->
 <?php include 'includes/header.php'; ?>
 
 <div class="container">
 
   <div class="row">
 
-    <div class="col-md-8">
+    <!-- KK: Title -->
+      <div class="col-md-8">
+        <br>
+          <h1 class="page-header">
+              CMS system by Kevin Kraaijveld
+              <br>
+              <small>Imagine that!</small>
+          </h1>
+        <br>
 
-      <h1 class="page-header">
-          CMS system by Kevin Kraaijveld
-          <br>
-          <small>Imagine that!</small>
-      </h1>
-
-        <!-- KK: Content -->
+      <!-- KK: Includes auther.php to display all post from set author -->
         <?php include 'includes/author.php'; ?>
-
 
       </div>
 
-      <!-- KK: Sidebar -->
+      <!-- KK: includes Sidebar -->
       <?php include 'includes/sidebar.php'; ?>
-    </div>
-<!-- KK: Footer -->
+
+  </div>
+
+<!-- KK: includes Footer -->
 <?php include 'includes/footer.php'; ?>

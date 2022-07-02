@@ -30,7 +30,17 @@ if($count < 1){
 $count = ceil ($count / $per_page);
 ?>
 
-
+<!-- KK: Title -->
+  <h2><?php
+    $query = "SELECT * FROM categories WHERE cat_id =$category_id ";
+    $select_all_categories = mysqli_query($connection, $query);
+    while($row = mysqli_fetch_assoc($select_all_categories)){
+      $cat_id = $row['cat_id'];
+      $cat_title = $row['cat_title'];
+      echo "$cat_title";
+    }
+  ?></h2>
+</br>
 
 <?php
 if(isset($_SESSION['user_role']) && $_SESSION['user_role'] == 'Admin' ){
@@ -58,7 +68,7 @@ if(isset($_SESSION['user_role']) && $_SESSION['user_role'] == 'Admin' ){
 
         <div class="card-body">
           <h2 class="card-title">
-              <a href="post.php?post_id=<?php echo $post_id?>">
+              <a href="/CMS_system/post/<?php echo $post_id?>">
                 <?php echo $post_title ?>
               </a>
               <?php
@@ -68,24 +78,27 @@ if(isset($_SESSION['user_role']) && $_SESSION['user_role'] == 'Admin' ){
               ?>
           </h2>
 
-          <!-- Preview Image -->
-          <a href="post.php?post_id=<?php echo $post_id?>">
-            <img class="img-fluid rounded" src="images/<?php echo $post_image ?>" alt="">
-          </a>
-          <br><br>
+          <!-- KK: Image -->
+          <?php
+          if(isset($post_image) && $post_image != ""){?>
+            <a href="/CMS_system/post/<?php echo $post_id?>">
+              <img class="card-img-top" src="/CMS_system/images/<?php echo $post_image ?>" alt="Card image cap">
+            </a>
+            <br><br>
+          <?php } ?>
 
           <!-- Post Content -->
           <p class="card-text">
             <?php echo $post_content ?>
           </p>
-
-          <a class="btn btn-primary" href="post.php?post_id=<?php echo $post_id?>">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
+        </pre>
+        <a href="/CMS_system/post/<?php echo $post_id?>" class="btn btn-primary">Read More &rarr;</a>
       </div>
 
         <div class="card-footer text-muted">
           <span class="glyphicon glyphicon-time"></span> Posted on <?php echo $post_date ?> by
 
-          <a href="author.php?author=<?php echo $post_author?>">
+          <a href="/CMS_system/author/<?php echo $post_author?>">
             <?php
               $query = "SELECT * FROM users WHERE user_role = 'Author' OR user_role = 'Admin'";
               $select_all_authors = mysqli_query($connection, $query);
@@ -113,9 +126,9 @@ if(isset($_SESSION['user_role']) && $_SESSION['user_role'] == 'Admin' ){
   <?php
   for ($i=1; $i <= $count ; $i++) {
     if($i == $page){
-      echo "<li class='page-item'><a class='page-link active'  href='index.php?page={$i}'>{$i}</a></li>";
+      echo "<li class='page-item'><a class='page-link active'  href='index.?page={$i}'>{$i}</a></li>";
     }else{
-      echo "<li class='page-item'><a class='page-link' href='category.php?category=$cat_id&page={$i}'>{$i}</a></li>";
+      echo "<li class='page-item'><a class='page-link' href='/CMS_system/category/$cat_id?page={$i}'>{$i}</a></li>";
     }
 
   }

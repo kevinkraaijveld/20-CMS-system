@@ -12,7 +12,7 @@
 ============================================================================ */
 
 /* 0. System functions
-/* Escape
+/* Security Escape
 ---------------------------------------------------------------------------- */
 function escape($string){
   global $connection;
@@ -88,9 +88,9 @@ function store_category(){
   if (isset($_POST['submit'])) {
     $cat_title = $_POST['cat_title'];
     if($cat_title =="" || empty($cat_title)){
-      echo"<div class='alert alert-danger alert-dismissible fade in'> <a href='' class='close' data-dismiss='alert' aria-label='close'>&times;</a>This field should not be empty</div>";
+      echo"<div class='alert alert-danger alert-dismissible '> <a href='' class='close' data-dismiss='alert' aria-label='close'>&times;</a>This field should not be empty</div>";
     }else{
-      echo"<div class='alert alert-success alert-dismissible fade in'> <a href='' class='close' data-dismiss='alert' aria-label='close'>&times;</a>Category " . $cat_title . " created</div>";
+      echo"<div class='alert alert-success alert-dismissible '> <a href='' class='close' data-dismiss='alert' aria-label='close'>&times;</a>Category " . $cat_title . " created</div>";
       $query = "INSERT INTO categories (cat_title)";
       $query .= "VALUES ('$cat_title')";
       $result = mysqli_query($connection, $query);
@@ -105,7 +105,7 @@ function change_category(){
   if (isset($_POST['update'])) {
     $cat_id = $_POST['cat_id'];
     $cat_title = $_POST['cat_title'];
-    echo"<div class='alert alert-success alert-dismissible fade in'> <a href='' class='close' data-dismiss='alert' aria-label='close'>&times;</a>Category " . $cat_title . " updated</div>";
+    echo"<div class='alert alert-success alert-dismissible '> <a href='' class='close' data-dismiss='alert' aria-label='close'>&times;</a>Category " . $cat_title . " updated</div>";
 
     $query = "UPDATE categories SET cat_title = '{$cat_title}' WHERE cat_id = {$cat_id}";
     $edit_query = mysqli_query($connection, $query);
@@ -145,7 +145,7 @@ function index_posts(){
   $query = "SELECT posts.post_id, posts.post_author, posts.post_title, posts.post_category_id, posts.post_status, posts.post_image, ";
   $query .= "posts.post_tags, posts.post_comment_count, posts.post_date, posts.post_views_count, categories.cat_id, categories.cat_title ";
   $query .= "FROM posts ";
-  $query .= "LEFT JOIN categories ON posts.post_category_id = categories.cat_id";
+  $query .= "LEFT JOIN categories ON posts.post_category_id = categories.cat_id ORDER BY post_id desc";
 
   $select_all_posts = mysqli_query($connection, $query);
 
@@ -166,7 +166,7 @@ function index_posts(){
 
     echo"<tr>";
       echo "<td>$post_id</td>";
-      $query = "SELECT * FROM users WHERE user_role = 'Author' OR user_role = 'Admin'";
+      $query = "SELECT * FROM users WHERE user_role = 'Author' OR user_role = 'Admin' ";
       $select_all_authors = mysqli_query($connection, $query);
       while($row = mysqli_fetch_assoc($select_all_authors)){
         $user_id = $row['user_id'];
@@ -180,10 +180,10 @@ function index_posts(){
           $author = $user_firstname . " " .$user_lastname;
         }
       }
-      echo "<td>$author</td>";
-      echo "<td><a href='../../post.php?post_id=$post_id'>$post_title</a></td>";
+      echo "<td><a href='../../author/$post_author'>$author</a></td>";
+      echo "<td><a href='../../post/$post_id'>$post_title</a></td>";
 
-      echo "<td>$cat_title</td>";
+      echo "<td><a href='../../category/$post_category_id'>$cat_title</a></td>";
       if($_SESSION['user_id'] === $post_author || $_SESSION['user_role'] == 'Admin' ){
         if($post_status == "Published"){
           echo "<td><a href='posts.php?draft={$post_id}'>Published</a></td>";
@@ -193,7 +193,11 @@ function index_posts(){
       }else{
           echo "<td>$post_status</td>";
       }
-      echo "<td><img src='../../images/$post_image' style='width:50px;'></td>";
+      if(isset($post_image) && $post_image!=''){
+        echo "<td><img src='../../images/$post_image' style='width:50px;'></td>";
+      }else {
+        echo "<td></td>";
+      }
       echo "<td>$post_tags</td>";
       echo "<td><a href='comments.php?source=view&post_id=$post_id'>$post_comment_count</a></td>";
       echo "<td>$post_date</td>";
@@ -267,7 +271,9 @@ function store_post(){
     $post_date = date('d-m-y H:i:s');
 
     move_uploaded_file($post_image_temp, "../../images/$post_image");
-    
+    echo"<div class='alert alert-success alert-dismissible '> <a href='' class='close' data-dismiss='alert' aria-label='close'>&times;</a>Post created - <a href='/CMS_system/index.php'>View post</a></div>";
+
+
     $query = "INSERT INTO posts(post_category_id, post_title, post_author, post_date, post_image, post_content, post_tags, post_status)";
     $query .= "VALUES({$post_category_id}, '{$post_title}', '{$post_author}', now(), '{$post_image}', '{$post_content}', '{$post_tags}', '{$post_status}')";
 
@@ -518,7 +524,7 @@ function index_users(){
         echo "<td><a href='users.php?source=edit_user&user_id={$user_id}'>Edit</a></td>";
         echo "<td><a rel='$user_id' href='javasctipt:void(0)' class='delete_link text-danger'>Delete</a></td>";
       }
-      echo "<td><a href='../../author.php?author=$user_id'>$username</a></td>";
+      echo "<td><a href='../../author/$user_id'>$username</a></td>";
     echo"</tr>";
 
   }
@@ -585,14 +591,14 @@ function store_user(){
     }
 
     if(!empty($username) && !empty($user_password)){
-      echo"<div class='alert alert-success alert-dismissible fade in'> <a href='' class='close' data-dismiss='alert' aria-label='close'>&times;</a>User created</div>";
+      echo"<div class='alert alert-success alert-dismissible '> <a href='' class='close' data-dismiss='alert' aria-label='close'>&times;</a>User created</div>";
 
       $query = "INSERT INTO users(username, user_firstname, user_lastname, user_email, user_image, user_password, user_role) ";
       $query .= "VALUES('{$username}', '{$user_firstname}', '{$user_lastname}', '{$user_email}', '{$user_image}', '$user_password', '{$user_role}')";
 
       $create_user_query = mysqli_query($connection, $query);
     }else{
-      echo"<div class='alert alert-danger alert-dismissible fade in'> <a href='' class='close' data-dismiss='alert' aria-label='close'>&times;</a>Please enter a username and password</div>";
+      echo"<div class='alert alert-danger alert-dismissible '> <a href='' class='close' data-dismiss='alert' aria-label='close'>&times;</a>Please enter a username and password</div>";
     }
 
   }
@@ -615,8 +621,56 @@ function destroy_user(){
     }
   }
 }
+/* Read Contact
+---------------------------------------------------------------------------- */
+function index_contact(){
+  global $connection;
+  $post_id=$_GET['post_id'];
+  $query = "SELECT * FROM contact  ORDER BY id";
 
-/* 5. Users_online
+  $select_all_contacts = mysqli_query($connection, $query);
+
+  while($row = mysqli_fetch_assoc($select_all_contacts)){
+    $contact_id = $row['id'];
+    $contact_name = $row['name'];
+    $contact_mail = $row['email'];
+    $contact_message = $row['message'];
+
+    echo"<tr>";
+      echo "<td>$contact_id</td>";
+      echo "<td>$contact_name</td>";
+      echo "<td>$contact_mail</td>";
+      echo "<td>" . substr($contact_message, 0,20) . "</td>";
+      echo "<td><a href='contact.php?source=view_contact&contact_id={$contact_id}'>View</a></td>";
+      echo "<td><a onclick=\" javascript: return confirm('Are you sure you want to delete this?'); \" href='contact.php?delete={$contact_id}' class='text-danger'>Delete</a></td>";
+    echo"</tr>";
+
+  }
+}
+
+/* Delete contact
+---------------------------------------------------------------------------- */
+function destroy_contact(){
+  global $connection;
+  if (isset($_GET['delete'])) {
+    if(isset($_SESSION['user_role'])){
+      if($_SESSION['user_role'] === 'Admin'){
+        $delete_contact = $_GET['delete'];
+        $query = "DELETE FROM contact WHERE id = {$delete_contact}";
+        $delete_query = mysqli_query($connection, $query);
+
+
+        header("Location: contact.php");
+      }
+    }
+  }
+}
+
+
+
+
+
+/* 6. Users_online
 Read
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
 /* Read Users_online
@@ -632,6 +686,7 @@ $query = "SELECT * FROM users_online WHERE session = '$session'";
 $send_query = mysqli_query($connection, $query);
 $count = mysqli_num_rows($send_query);
 
+// KK: If new user / else recurring user
 if($count == NULL){
   mysqli_query($connection, "INSERT INTO users_online(session, time) VALUES('$session','$time')");
 }else{
