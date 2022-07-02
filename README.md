@@ -2,7 +2,7 @@ CMS system
 
 Made by Kevin Kraaijveld
 
-Senior programming student at Da Vinci College Gorinchem
+Senior software developer student at Da Vinci College Gorinchem
 
 www.kevii.nl
 
