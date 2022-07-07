@@ -34,7 +34,7 @@ if (isset($_POST['login'])) {
   $user_password = crypt($user_password, $db_user_password);
 
 // KK: Role checks
-  if($username === $db_username && $user_password === $db_user_password  && $db_user_role === 'Admin' || $db_user_role === 'Admin' ){
+  if(strtolower( $username ) == strtolower( $db_username ) && $user_password === $db_user_password  && $db_user_role === 'Admin' ){
     $_SESSION['user_id'] = $db_user_id;
     $_SESSION['username'] = $db_username;
     $_SESSION['user_firstname'] = $db_user_firstname;
@@ -46,7 +46,7 @@ if (isset($_POST['login'])) {
 
     header("Location: ../admin/pages/index.php");
 
-  }elseif (($username === $db_username && $user_password === $db_user_password  && $db_user_role === 'Author' || $db_user_role === 'Author' )) {
+  }elseif( strtolower( $username ) == strtolower( $db_username )  && $user_password === $db_user_password  && $db_user_role === 'Author') {
     $_SESSION['user_id'] = $db_user_id;
     $_SESSION['username'] = $db_username;
     $_SESSION['user_firstname'] = $db_user_firstname;
@@ -57,7 +57,7 @@ if (isset($_POST['login'])) {
     $_SESSION['user_password'] = $db_user_password;
 
     header("Location: ../admin/pages/index.php");
-  }elseif($username === $db_username && $user_password === $db_user_password  && $db_user_role === 'Subscriber' || $db_user_role === 'Subscriber'){
+  }elseif(strtolower( $username ) == strtolower( $db_username ) && $user_password === $db_user_password  && $db_user_role === 'Subscriber'){
     $_SESSION['user_id'] = $db_user_id;
     $_SESSION['username'] = $db_username;
     $_SESSION['user_firstname'] = $db_user_firstname;
@@ -70,6 +70,7 @@ if (isset($_POST['login'])) {
     header("Location: ../index.php");
   }else{
     echo "<script>alert('Ongeldige logingegevens'); window.location = '../index.php';</script>";
+
   }
 }
 ?>
