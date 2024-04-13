@@ -9,3 +9,5 @@ Senior software developer student at Da Vinci College Gorinchem
 www.linkedin.com/in/kevinkraaijveld
 
 www.github.com/kevinkraaijveld
+
+https://www.sololearn.com/en/profile/6274601
